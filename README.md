@@ -14,7 +14,7 @@ $ tables random_encounter.csv -f Terrain=woods
 ### Arguments
 
 * `<filename>` (Required)  
-  The JSON file with the table definition (see below).
+  The CSV file with the table definition (see below).
 * `-f {column=value[,value...]} | --filter {column=value[,value...]` (Optional)  
   Optional column filters. Only take results that match.
   Multiple values can be listed, separated by commas.

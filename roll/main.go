@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/alecthomas/kong"
-	"gitlab.com/tokenshift/tables/dice"
+	"github.com/tokenshift/tables/dice"
 )
 
 var Args struct {

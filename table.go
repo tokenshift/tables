@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitlab.com/tokenshift/tables/dice"
+	"github.com/tokenshift/tables/dice"
 )
 
 type Table struct {
