@@ -17,6 +17,7 @@ func main() {
 	var args struct {
 		Filename string            `kong:"arg,required,type='path',help='The CSV file with the table definition.'"`
 		Filters  map[string]string `kong:"short='f',name='filter',help='Optional column filter(s). Only take results that match.'"`
+		Hide     []string          `kong:"short='H',help='Column name(s) to omit from the output.'"`
 		Number   int               `kong:"short='n',default=1,help='Number of rolls/selections to make. Defaults to 1.'"`
 		Output   string            `kong:"short='o',enum='simple,table,csv',default='simple',help='Output format. Simple, tabular, or CSV.'"`
 	}
@@ -30,16 +31,17 @@ func main() {
 	ctx.FatalIfErrorf(err)
 
 	filtered := table.Filter(args.Filters)
+	hidden := filtered.Omit(args.Hide)
 
 	switch args.Output {
 	case "simple":
-		filtered.DisplaySimpleRows(args.Number)
+		hidden.DisplaySimpleRows(args.Number)
 	case "csv":
-		filtered.DisplayCSVRows(args.Number)
+		hidden.DisplayCSVRows(args.Number)
 	case "table":
-		filtered.DisplayTableRows(args.Number)
+		hidden.DisplayTableRows(args.Number)
 	default:
-		filtered.DisplaySimpleRows(args.Number)
+		hidden.DisplaySimpleRows(args.Number)
 	}
 }
 

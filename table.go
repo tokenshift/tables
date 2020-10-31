@@ -286,3 +286,38 @@ func applyDieRolls(input string) string {
 
 	return result.String()
 }
+
+func (orig Table) Omit(columnNames []string) (copy Table) {
+	include := make(map[int]bool, len(orig.Columns))
+
+	for c, col := range orig.Columns {
+		include[c] = true
+
+		for _, omitted := range columnNames {
+			include[c] = include[c] && strings.TrimSpace(col.Name) != strings.TrimSpace(omitted)
+		}
+	}
+
+	copy.Columns = make([]Column, 0, len(orig.Columns))
+	copy.Rows = make([]Row, len(orig.Rows))
+
+	for c, col := range orig.Columns {
+		if include[c] {
+			copy.Columns = append(copy.Columns, col)
+		}
+	}
+
+	for r, row := range orig.Rows {
+		newRow := make([]string, 0, len(copy.Columns))
+
+		for c, val := range row {
+			if include[c] {
+				newRow = append(newRow, val)
+			}
+		}
+
+		copy.Rows[r] = newRow
+	}
+
+	return copy
+}
