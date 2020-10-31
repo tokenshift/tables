@@ -1,0 +1,5 @@
+*.csv
+*.json
+*.exe
+*.exe*
+tables
