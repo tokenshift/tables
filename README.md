@@ -48,4 +48,4 @@ the die roll.
 If you want the literal square brackets to appear in the value and not be
 replaced by a die roll, escape them using a backslash.
 
-For valid die roll specifiers, see ./dice/README.md.
+For valid die roll specifiers, see [./dice/README.md]([./dice/README.md]).
